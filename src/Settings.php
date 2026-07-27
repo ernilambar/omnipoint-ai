@@ -24,10 +24,10 @@ use WordPress\AiClient\AiClient;
  */
 class Settings {
 
-	const ENDPOINT_OPTION_NAME = 'ai_provider_omnipoint_ai_endpoint_url';
-	const MODEL_OPTION_NAME    = 'ai_provider_omnipoint_ai_default_model';
-	const AJAX_ACTION          = 'ai_provider_omnipoint_ai_get_models';
-	const NONCE_KEY            = 'ai_provider_omnipoint_ai_get_models';
+	const ENDPOINT_OPTION_NAME = 'omnipoint_ai_endpoint_url';
+	const MODEL_OPTION_NAME    = 'omnipoint_ai_default_text_model';
+	const AJAX_ACTION          = 'omnipoint_ai_get_models';
+	const NONCE_KEY            = 'omnipoint_ai_get_models';
 	const DEFAULT_ENDPOINT_URL = 'https://api.openai.com/v1';
 
 	/**

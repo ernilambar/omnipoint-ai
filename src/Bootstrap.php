@@ -33,6 +33,9 @@ class Bootstrap {
 		add_action( 'init', [ $this, 'register_provider' ], 5 );
 		add_action( 'init', [ $this, 'register_fallback_auth' ], 15 );
 		add_filter( 'plugin_action_links_' . OMNIPOINT_AI_BASE_FILENAME, [ $this, 'plugin_action_links' ] );
+		add_filter( 'http_request_host_is_external', [ $this, 'allow_external_requests' ], 10, 3 );
+		add_filter( 'http_allowed_safe_ports', [ $this, 'allow_ports' ] );
+		add_filter( 'http_request_args', [ $this, 'extend_timeout' ], 10, 2 );
 
 		( new Settings() )->init();
 	}
@@ -103,5 +106,66 @@ class Bootstrap {
 			'omnipoint_ai',
 			new ApiKeyRequestAuthentication( false !== $api_key ? $api_key : '' )
 		);
+	}
+
+	/**
+	 * Allows external requests to the configured endpoint.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool   $external Whether the request is external.
+	 * @param string $host     The host of the request.
+	 * @param string $url      The URL of the request.
+	 * @return bool Whether the request is allowed.
+	 */
+	public function allow_external_requests( $external, $host, $url ): bool {
+		if ( strpos( $url, OmnipointAiProvider::url() ) !== false ) {
+			return true;
+		}
+
+		return $external;
+	}
+
+	/**
+	 * Allows the configured endpoint's port.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<int> $ports The ports.
+	 * @return array<int> The allowed ports.
+	 */
+	public function allow_ports( $ports ): array {
+		$port = wp_parse_url( OmnipointAiProvider::url(), PHP_URL_PORT );
+
+		if ( ! $port ) {
+			return $ports;
+		}
+
+		return array_merge( $ports, [ $port ] );
+	}
+
+	/**
+	 * Extends the timeout for requests to the configured endpoint.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<string, mixed> $args HTTP request args.
+	 * @param string               $url  Request URL.
+	 * @return array<string, mixed> Filtered HTTP request args.
+	 */
+	public function extend_timeout( array $args, string $url ): array {
+		if ( strpos( $url, OmnipointAiProvider::url() ) === false ) {
+			return $args;
+		}
+
+		$existing_timeout = isset( $args['timeout'] ) && is_numeric( $args['timeout'] )
+			? (float) $args['timeout']
+			: 0.0;
+
+		if ( $existing_timeout < 180.0 ) {
+			$args['timeout'] = 180.0;
+		}
+
+		return $args;
 	}
 }
