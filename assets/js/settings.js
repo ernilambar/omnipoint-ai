@@ -1,8 +1,8 @@
 ( function () {
-	var data = window.omnipointAiSettings || {};
+	const data = window.omnipointAiSettings || {};
 
-	var select = document.getElementById( data.selectId );
-	var status = document.getElementById( data.statusId );
+	const select = document.getElementById( data.selectId );
+	const status = document.getElementById( data.statusId );
 
 	if ( ! select ) {
 		return;
@@ -11,13 +11,13 @@
 	function populate( ids, currentValue ) {
 		select.innerHTML = '';
 
-		var emptyOption = document.createElement( 'option' );
+		const emptyOption = document.createElement( 'option' );
 		emptyOption.value = '';
 		emptyOption.textContent = data.noOverrideLabel;
 		select.appendChild( emptyOption );
 
 		ids.forEach( function ( modelId ) {
-			var option = document.createElement( 'option' );
+			const option = document.createElement( 'option' );
 			option.value = modelId;
 			option.textContent = modelId;
 			if ( modelId === currentValue ) {
@@ -54,7 +54,7 @@
 				return;
 			}
 
-			var modelIds = Array.isArray( json.data.models ) ? json.data.models : [];
+			const modelIds = Array.isArray( json.data.models ) ? json.data.models : [];
 
 			populate( modelIds, data.currentModel );
 

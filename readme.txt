@@ -1,4 +1,4 @@
-=== Omnipoint AI Provider for OpenAI Compatible ===
+=== Omnipoint AI===
 
 Contributors: nilambar
 Tags: ai, openai, ai client, connector, api
@@ -9,26 +9,25 @@ Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Omnipoint AI provider for OpenAI-compatible endpoints for the WordPress AI Client.
+AI provider for OpenAI-compatible endpoints.
 
 == Description ==
 
-Omnipoint AI registers any OpenAI-compatible API endpoint as a provider for the WordPress AI Client (WordPress 7.0+).
+Omnipoint AI registers any OpenAI-compatible API endpoint as a provider for the WordPress AI Client.
 
-Set an API endpoint URL and, optionally, a default text model, then use it directly from the AI Client wherever supported.
+Set an API endpoint URL and, then use it directly from the AI Client wherever supported.
 
 = Features =
 
 * Works with any OpenAI-compatible chat completions API
 * Configurable API endpoint URL
-* Optional default text model override
 * Shows a live model count once connected
 
 = Requirements =
 
 * WordPress 7.0 or later
 * PHP 7.4 or later
-* An OpenAI-compatible API endpoint and API key
+* An OpenAI-compatible API endpoint and API key (optional for local provider)
 
 == Installation ==
 
@@ -59,10 +58,6 @@ Yes, unless the endpoint you configure does not require one. Set it under Settin
 = What is the default endpoint? =
 
 `https://api.openai.com/v1` — override it with any OpenAI-compatible endpoint under Settings → Omnipoint AI.
-
-= Which models are supported? =
-
-Any text generation model exposed by the configured endpoint's models listing.
 
 == Changelog ==
 
