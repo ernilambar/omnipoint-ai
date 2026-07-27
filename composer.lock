@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acd5d621d75478e307613cf23fb52115",
+    "content-hash": "f693705e6772c64af4a691a990758dae",
     "packages": [],
     "packages-dev": [
         {
@@ -163,16 +163,16 @@
         },
         {
             "name": "ernilambar/coding-standard",
-            "version": "1.0.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ernilambar/coding-standard.git",
-                "reference": "955816dfbf71af17405200bfdbd4f1570fcfb393"
+                "reference": "7bf0a28036cc4015d2d50d9f15e6f0513914e273"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ernilambar/coding-standard/zipball/955816dfbf71af17405200bfdbd4f1570fcfb393",
-                "reference": "955816dfbf71af17405200bfdbd4f1570fcfb393",
+                "url": "https://api.github.com/repos/ernilambar/coding-standard/zipball/7bf0a28036cc4015d2d50d9f15e6f0513914e273",
+                "reference": "7bf0a28036cc4015d2d50d9f15e6f0513914e273",
                 "shasum": ""
             },
             "require": {
@@ -180,11 +180,12 @@
                 "ext-tokenizer": "*",
                 "ext-xmlreader": "*",
                 "php": ">=7.4",
-                "wp-coding-standards/wpcs": "^3.3 || dev-develop"
+                "squizlabs/php_codesniffer": "^3.13 || ^4.0"
             },
             "require-dev": {
                 "php-parallel-lint/php-console-highlighter": "^1.0.0",
                 "php-parallel-lint/php-parallel-lint": "^1.3.2",
+                "phpcompatibility/php-compatibility": "^10",
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
                 "slevomat/coding-standard": "^8"
             },
@@ -201,16 +202,16 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Nilambar Coding Standard for PHP_CodeSniffer.",
+            "description": "PHP_CodeSniffer standard for PHP projects.",
             "keywords": [
                 "phpcs",
                 "standard"
             ],
             "support": {
                 "issues": "https://github.com/ernilambar/coding-standard/issues",
-                "source": "https://github.com/ernilambar/coding-standard/tree/1.0.4"
+                "source": "https://github.com/ernilambar/coding-standard/tree/2.0.0"
             },
-            "time": "2026-07-02T12:53:09+00:00"
+            "time": "2026-07-13T07:06:54+00:00"
         },
         {
             "name": "gettext/gettext",
@@ -615,16 +616,16 @@
         },
         {
             "name": "phpcsstandards/phpcsutils",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "c216317e96c8b3f5932808f9b0f1f7a14e3bbf55"
+                "reference": "5f35d9408c54d7b529501f3c688b6eae562aea1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/c216317e96c8b3f5932808f9b0f1f7a14e3bbf55",
-                "reference": "c216317e96c8b3f5932808f9b0f1f7a14e3bbf55",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/5f35d9408c54d7b529501f3c688b6eae562aea1f",
+                "reference": "5f35d9408c54d7b529501f3c688b6eae562aea1f",
                 "shasum": ""
             },
             "require": {
@@ -704,7 +705,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-12-08T14:27:58+00:00"
+            "time": "2026-07-27T10:28:41+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",

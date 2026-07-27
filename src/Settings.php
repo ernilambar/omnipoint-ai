@@ -155,7 +155,7 @@ class Settings {
 				'noOverrideLabel' => __( '&mdash; Default &mdash;', 'omnipoint-ai' ),
 				'selectId'        => self::MODEL_OPTION_NAME,
 				'statusId'        => 'omnipoint-ai-status',
-				'errorLabel'      => __( 'Could not connect to the endpoint.', 'omnipoint-ai' ),
+				'errorLabel'      => __( 'Connection failed.', 'omnipoint-ai' ),
 			]
 		);
 	}

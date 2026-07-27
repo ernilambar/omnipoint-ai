@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Omnipoint AI Provider for OpenAI Compatible
+ * Plugin Name:       Omnipoint AI
  * Plugin URI:        https://github.com/ernilambar/omnipoint-ai
- * Description:       Omnipoint AI provider for OpenAI-compatible endpoints for the WordPress AI Client.
+ * Description:       AI provider for OpenAI-compatible endpoints.
  * Requires at least: 7.0
  * Requires PHP:      7.4
  * Version: 1.0.0

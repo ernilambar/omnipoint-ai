@@ -100,7 +100,13 @@ class OmnipointAiModelMetadataDirectory extends AbstractOpenAiCompatibleModelMet
 			new SupportedOption( OptionEnum::functionDeclarations() ),
 			new SupportedOption( OptionEnum::customOptions() ),
 			new SupportedOption( OptionEnum::outputModalities(), [ [ ModalityEnum::text() ] ] ),
-			new SupportedOption( OptionEnum::inputModalities(), [ [ ModalityEnum::text() ] ] ),
+			new SupportedOption(
+				OptionEnum::inputModalities(),
+				[
+					[ ModalityEnum::text() ],
+					[ ModalityEnum::text(), ModalityEnum::image() ],
+				]
+			),
 		];
 
 		$models = [];

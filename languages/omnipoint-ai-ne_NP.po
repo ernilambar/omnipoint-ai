@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Omnipoint AI Provider for OpenAI Compatible 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/omnipoint-ai\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-07-27T11:10:56+00:00\n"
+"Language: ne_NP\n"
+"X-Generator: WP-CLI 2.13.0-alpha\n"
+"X-Domain: omnipoint-ai\n"
+
+#. Plugin Name of the plugin
+#: omnipoint-ai.php:3
+msgid "Omnipoint AI"
+msgstr "Omnipoint AI"
+
+#. Plugin URI of the plugin
+#: omnipoint-ai.php:4
+msgid "https://github.com/ernilambar/omnipoint-ai"
+msgstr "https://github.com/ernilambar/omnipoint-ai"
+
+#. Description of the plugin
+#: omnipoint-ai.php:5
+msgid "AI provider for OpenAI-compatible endpoints."
+msgstr "ओपनएआई-अनुकूल इन्डपोइन्टहरूको लागि एआई प्रोभाइडर।"
+
+#. Author of the plugin
+#: omnipoint-ai.php:9
+msgid "Nilambar Sharma"
+msgstr "निलाम्वर शर्मा"
+
+#. Author URI of the plugin
+#: omnipoint-ai.php:10
+msgid "https://nilambar.net"
+msgstr "https://nilambar.net"
+
+#: src/Bootstrap.php:55
+msgid "Settings"
+msgstr "सेटिङहरू"
+
+#: src/Provider/OmnipointAiProvider.php:98
+msgid "Text generation with any OpenAI-compatible API endpoint."
+msgstr "ओपनएआई-अनुकूल एपिआई इन्डपोइन्टसँग पाठ उत्पन्न गर्नुहोस्।"
+
+#: src/Settings.php:52
+msgctxt "page title"
+msgid "Omnipoint AI Settings"
+msgstr "ओम्निपोइन्ट एआई सेटिङहरू"
+
+#: src/Settings.php:53
+msgctxt "menu title"
+msgid "Omnipoint AI"
+msgstr "ओम्निपोइन्ट एआई"
+
+#: src/Settings.php:95
+msgid "API Endpoint URL"
+msgstr "एपिआई इन्डपोइन्ट युआरएल"
+
+#: src/Settings.php:103
+msgid "Default Text Model"
+msgstr "पूर्वनिर्धारित पाठ मोडेल"
+
+#: src/Settings.php:155
+msgid "&mdash; Default &mdash;"
+msgstr "&mdash; पूर्वनिर्धारित &mdash;"
+
+#: src/Settings.php:158
+msgid "Connection failed."
+msgstr "जडान असफल भयो।"
+
+#: src/Settings.php:194
+msgid "Loading…"
+msgstr "लोड हुँदै..."
+
+#: src/Settings.php:243
+msgid "Insufficient permissions."
+msgstr "पर्याप्त अनुमति छैन।"
+
+#: src/Settings.php:247
+msgid "AI Client is not available."
+msgstr "एआई क्लाइन्ट उपलब्ध छैन।"
+
+#. translators: %d: number of models.
+#: src/Settings.php:273
+#, php-format
+msgid "%d model loaded."
+msgid_plural "%d models loaded."
+msgstr[0] "%d मोडेल लोड गरियो।"
+msgstr[1] "%d मोडेलहरू लोड गरिए।"

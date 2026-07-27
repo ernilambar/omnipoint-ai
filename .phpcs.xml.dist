@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="Omnipoint AI Provider for OpenAI Compatible">
-	<description>Coding standards for the Omnipoint AI Provider for OpenAI Compatible plugin.</description>
+	<description>Coding standards for the Omnipoint AI plugin.</description>
 
 	<file>.</file>
 
