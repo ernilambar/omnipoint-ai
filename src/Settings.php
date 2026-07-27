@@ -166,18 +166,36 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	public function render_endpoint_url_field(): void {
-		$value       = get_option( self::ENDPOINT_OPTION_NAME, self::DEFAULT_ENDPOINT_URL );
-		$datalist_id = self::ENDPOINT_OPTION_NAME . '_datalist';
+		$value         = get_option( self::ENDPOINT_OPTION_NAME, self::DEFAULT_ENDPOINT_URL );
+		$datalist_id   = self::ENDPOINT_OPTION_NAME . '_datalist';
+		$env_value     = getenv( 'OMNIPOINT_AI_BASE_URL' );
+		$is_overridden = false !== $env_value && '' !== $env_value;
 		?>
 		<input
 			type="url"
 			name="<?php echo esc_attr( self::ENDPOINT_OPTION_NAME ); ?>"
 			id="<?php echo esc_attr( self::ENDPOINT_OPTION_NAME ); ?>"
-			value="<?php echo esc_attr( $value ); ?>"
+			value="<?php echo esc_attr( $is_overridden ? rtrim( $env_value, '/' ) : $value ); ?>"
 			class="regular-text"
 			placeholder="<?php echo esc_attr( self::DEFAULT_ENDPOINT_URL ); ?>"
 			list="<?php echo esc_attr( $datalist_id ); ?>"
+			<?php disabled( $is_overridden ); ?>
 		/>
+		<?php if ( $is_overridden ) : ?>
+			<input type="hidden" name="<?php echo esc_attr( self::ENDPOINT_OPTION_NAME ); ?>" value="<?php echo esc_attr( $value ); ?>" />
+			<p class="description">
+				<?php
+				echo wp_kses(
+					sprintf(
+						/* translators: %s: environment variable name. */
+						__( 'Overridden by the %s environment variable.', 'omnipoint-ai' ),
+						'<code>OMNIPOINT_AI_BASE_URL</code>'
+					),
+					[ 'code' => [] ]
+				);
+				?>
+			</p>
+		<?php endif; ?>
 		<datalist id="<?php echo esc_attr( $datalist_id ); ?>">
 			<?php foreach ( self::get_ai_providers() as $label => $url ) : ?>
 				<option value="<?php echo esc_attr( $url ); ?>"><?php echo esc_html( $label ); ?></option>
