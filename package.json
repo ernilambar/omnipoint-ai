@@ -1,0 +1,44 @@
+{
+	"name": "omnipoint-ai",
+	"version": "1.0.0",
+	"description": "Omnipoint AI provider for OpenAI-compatible endpoints for the WordPress AI Client.",
+	"keywords": [
+		"wordpress",
+		"wordpress-plugin"
+	],
+	"homepage": "https://github.com/ernilambar/omnipoint-ai",
+	"bugs": {
+		"url": "https://github.com/ernilambar/omnipoint-ai/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ernilambar/omnipoint-ai.git"
+	},
+	"license": "GPL-2.0-or-later",
+	"author": "Nilambar Sharma",
+	"type": "module",
+	"main": "omnipoint-ai.php",
+	"scripts": {
+		"predeploy": "rimraf build deploy vendor && pnpm run ready",
+		"deploy": "packtor",
+		"ready": "pnpm run vendor",
+		"vendor": "composer install --no-dev --no-scripts -o",
+		"version": "easy-replace-in-files",
+		"wpassets": "wp-deployer --assets",
+		"prewpdeploy": "pnpm run deploy",
+		"wpdeploy": "wp-deployer"
+	},
+	"browserslist": "> 1%, last 2 versions, not dead",
+	"devDependencies": {
+		"easy-replace-in-files": "^2.0.0",
+		"packtor": "^2.0.0",
+		"rimraf": "^6.1.3",
+		"wp-deployer": "^2.0.0"
+	},
+	"wpDeployer": {
+		"repoType": "plugin",
+		"username": "nilambar",
+		"buildDir": "deploy/omnipoint-ai",
+		"deployAssets": false
+	}
+}
