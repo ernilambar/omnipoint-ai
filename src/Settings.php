@@ -166,7 +166,8 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	public function render_endpoint_url_field(): void {
-		$value = get_option( self::ENDPOINT_OPTION_NAME, self::DEFAULT_ENDPOINT_URL );
+		$value       = get_option( self::ENDPOINT_OPTION_NAME, self::DEFAULT_ENDPOINT_URL );
+		$datalist_id = self::ENDPOINT_OPTION_NAME . '_datalist';
 		?>
 		<input
 			type="url"
@@ -175,8 +176,47 @@ class Settings {
 			value="<?php echo esc_attr( $value ); ?>"
 			class="regular-text"
 			placeholder="<?php echo esc_attr( self::DEFAULT_ENDPOINT_URL ); ?>"
+			list="<?php echo esc_attr( $datalist_id ); ?>"
 		/>
+		<datalist id="<?php echo esc_attr( $datalist_id ); ?>">
+			<?php foreach ( self::get_ai_providers() as $label => $url ) : ?>
+				<option value="<?php echo esc_attr( $url ); ?>"><?php echo esc_html( $label ); ?></option>
+			<?php endforeach; ?>
+		</datalist>
 		<?php
+	}
+
+	/**
+	 * Returns a list of popular AI provider endpoint URLs.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array<string, string> Provider name to base URL map.
+	 */
+	private static function get_ai_providers(): array {
+		return [
+			'Alibaba Qwen'  => 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1',
+			'Anthropic'     => 'https://api.anthropic.com/v1',
+			'Cerebras'      => 'https://api.cerebras.ai/v1',
+			'DeepInfra'     => 'https://api.deepinfra.com/v1/openai',
+			'DeepSeek'      => 'https://api.deepseek.com/v1',
+			'Fireworks'     => 'https://api.fireworks.ai/inference/v1',
+			'Google Gemini' => 'https://generativelanguage.googleapis.com/v1beta/openai',
+			'Groq'          => 'https://api.groq.com/openai/v1',
+			'LM Studio'     => 'http://localhost:1234/v1',
+			'Mistral'       => 'https://api.mistral.ai/v1',
+			'Moonshot AI'   => 'https://api.moonshot.ai/v1',
+			'Novita AI'     => 'https://api.novita.ai/v3/openai',
+			'NVIDIA NIM'    => 'https://integrate.api.nvidia.com/v1',
+			'Ollama'        => 'http://localhost:11434/v1',
+			'OpenAI'        => 'https://api.openai.com/v1',
+			'OpenRouter'    => 'https://openrouter.ai/api/v1',
+			'Perplexity'    => 'https://api.perplexity.ai',
+			'SambaNova'     => 'https://api.sambanova.ai/v1',
+			'Together AI'   => 'https://api.together.xyz/v1',
+			'vLLM'          => 'http://localhost:8000/v1',
+			'xAI (Grok)'    => 'https://api.x.ai/v1',
+		];
 	}
 
 	/**
