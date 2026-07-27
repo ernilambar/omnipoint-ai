@@ -41,7 +41,7 @@
 		method: 'POST',
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams( {
-			action: 'ai_provider_omnipoint_ai_get_models',
+			action: 'omnipoint_ai_get_models',
 			nonce: data.nonce,
 		} ),
 	} )
