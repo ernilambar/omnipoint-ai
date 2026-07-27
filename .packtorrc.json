@@ -1,0 +1,11 @@
+{
+	"files": [
+		"assets/**/*",
+		"languages/**/*",
+		"src/**/*",
+		"vendor/**/*",
+		"omnipoint-ai.php",
+		"composer.json",
+		"readme.txt"
+	]
+}
