@@ -156,6 +156,7 @@ class Settings {
 				'selectId'        => self::MODEL_OPTION_NAME,
 				'statusId'        => 'omnipoint-ai-status',
 				'errorLabel'      => __( 'Connection failed.', 'omnipoint-ai' ),
+				'listId'          => 'omnipoint-ai-model-list',
 			]
 		);
 	}
@@ -249,7 +250,10 @@ class Settings {
 		>
 			<option value=""><?php esc_html_e( 'Loading…', 'omnipoint-ai' ); ?></option>
 		</select>
-		<p id="omnipoint-ai-status" class="description"></p>
+		<p>
+			<button type="button" id="omnipoint-ai-status" class="button-link description" aria-expanded="false"></button>
+		</p>
+		<ul id="omnipoint-ai-model-list" style="display: none; max-height: 400px; overflow-y: auto; margin-top: 10px;"></ul>
 		<?php
 	}
 

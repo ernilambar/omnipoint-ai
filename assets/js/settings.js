@@ -3,9 +3,22 @@
 
 	const select = document.getElementById( data.selectId );
 	const status = document.getElementById( data.statusId );
+	const list = document.getElementById( data.listId );
 
 	if ( ! select ) {
 		return;
+	}
+
+	if ( status && list ) {
+		status.addEventListener( 'click', function () {
+			if ( ! list.childElementCount ) {
+				return;
+			}
+
+			const isHidden = 'none' === list.style.display;
+			list.style.display = isHidden ? 'block' : 'none';
+			status.setAttribute( 'aria-expanded', isHidden ? 'true' : 'false' );
+		} );
 	}
 
 	function populate( ids, currentValue ) {
@@ -16,6 +29,10 @@
 		emptyOption.textContent = data.noOverrideLabel;
 		select.appendChild( emptyOption );
 
+		if ( list ) {
+			list.innerHTML = '';
+		}
+
 		ids.forEach( function ( modelId ) {
 			const option = document.createElement( 'option' );
 			option.value = modelId;
@@ -24,6 +41,12 @@
 				option.selected = true;
 			}
 			select.appendChild( option );
+
+			if ( list ) {
+				const item = document.createElement( 'li' );
+				item.textContent = modelId;
+				list.appendChild( item );
+			}
 		} );
 
 		select.disabled = false;
