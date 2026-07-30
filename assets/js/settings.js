@@ -1,23 +1,24 @@
 ( function () {
 	const data = window.omnipointAiSettings || {};
 
-	const select = document.getElementById( data.selectId );
-	const status = document.getElementById( data.statusId );
-	const list = document.getElementById( data.listId );
+	const select = document.getElementById( data.modelSelectId );
+	const status = document.getElementById( 'omnipoint-ai-status' );
+	const listWrap = document.getElementById( 'omnipoint-ai-model-list-wrap' );
+	const list = document.getElementById( 'omnipoint-ai-model-list' );
+	const showAll = document.getElementById( 'omnipoint-ai-show-all' );
 
 	if ( ! select ) {
 		return;
 	}
 
-	if ( status && list ) {
-		status.addEventListener( 'click', function () {
-			if ( ! list.childElementCount ) {
-				return;
-			}
+	const maxVisible = 10;
 
-			const isHidden = 'none' === list.style.display;
-			list.style.display = isHidden ? 'block' : 'none';
-			status.setAttribute( 'aria-expanded', isHidden ? 'true' : 'false' );
+	if ( showAll && list ) {
+		showAll.addEventListener( 'click', function () {
+			Array.prototype.forEach.call( list.children, function ( item ) {
+				item.style.display = '';
+			} );
+			showAll.style.display = 'none';
 		} );
 	}
 
@@ -33,7 +34,7 @@
 			list.innerHTML = '';
 		}
 
-		ids.forEach( function ( modelId ) {
+		ids.forEach( function ( modelId, index ) {
 			const option = document.createElement( 'option' );
 			option.value = modelId;
 			option.textContent = modelId;
@@ -45,9 +46,20 @@
 			if ( list ) {
 				const item = document.createElement( 'li' );
 				item.textContent = modelId;
+				if ( index >= maxVisible ) {
+					item.style.display = 'none';
+				}
 				list.appendChild( item );
 			}
 		} );
+
+		if ( listWrap ) {
+			listWrap.style.display = ids.length ? 'block' : 'none';
+		}
+
+		if ( showAll ) {
+			showAll.style.display = ids.length > maxVisible ? '' : 'none';
+		}
 
 		select.disabled = false;
 	}

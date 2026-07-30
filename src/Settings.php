@@ -153,10 +153,8 @@ class Settings {
 				'nonce'           => wp_create_nonce( self::NONCE_KEY ),
 				'currentModel'    => get_option( self::MODEL_OPTION_NAME, '' ),
 				'noOverrideLabel' => __( '&mdash; Default &mdash;', 'omnipoint-ai' ),
-				'selectId'        => self::MODEL_OPTION_NAME,
-				'statusId'        => 'omnipoint-ai-status',
+				'modelSelectId'   => self::MODEL_OPTION_NAME,
 				'errorLabel'      => __( 'Connection failed.', 'omnipoint-ai' ),
-				'listId'          => 'omnipoint-ai-model-list',
 			]
 		);
 	}
@@ -250,10 +248,12 @@ class Settings {
 		>
 			<option value=""><?php esc_html_e( 'Loading…', 'omnipoint-ai' ); ?></option>
 		</select>
-		<p>
-			<button type="button" id="omnipoint-ai-status" class="button-link description" aria-expanded="false"></button>
-		</p>
-		<ul id="omnipoint-ai-model-list" style="display: none; max-height: 400px; overflow-y: auto; margin-top: 10px;"></ul>
+		<p id="omnipoint-ai-status" class="description"></p>
+		<div id="omnipoint-ai-model-list-wrap" style="display: none; margin-top: 10px;">
+			<p><strong><?php esc_html_e( 'Models:', 'omnipoint-ai' ); ?></strong></p>
+			<ul id="omnipoint-ai-model-list"></ul>
+			<button type="button" id="omnipoint-ai-show-all" class="button-link" style="display: none;"><?php esc_html_e( 'Show All', 'omnipoint-ai' ); ?></button>
+		</div>
 		<?php
 	}
 
