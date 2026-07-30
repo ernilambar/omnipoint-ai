@@ -43,6 +43,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: src/Bootstrap.php:61
+msgid "Connectors"
+msgstr ""
+
 #: src/Provider/OmnipointAiProvider.php:98
 msgid "Text generation with any OpenAI-compatible API endpoint."
 msgstr ""

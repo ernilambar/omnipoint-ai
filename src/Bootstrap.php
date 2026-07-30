@@ -55,7 +55,13 @@ class Bootstrap {
 			esc_html__( 'Settings', 'omnipoint-ai' )
 		);
 
-		array_unshift( $links, $settings_link );
+		$connectors_link = sprintf(
+			'<a href="%s">%s</a>',
+			admin_url( 'options-connectors.php' ),
+			esc_html__( 'Connectors', 'omnipoint-ai' )
+		);
+
+		array_unshift( $links, $settings_link, $connectors_link );
 
 		return $links;
 	}

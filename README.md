@@ -1,6 +1,6 @@
 # Omnipoint AI Provider for OpenAI Compatible
 
-WordPress plugin that registers any OpenAI-compatible API endpoint as an AI provider for the [WordPress AI Client](https://make.wordpress.org/core/2025/03/13/ai-client-for-wordpress/).
+WordPress plugin that registers any OpenAI-compatible API endpoint as an AI provider for the WordPress AI Client.
 
 ## Requirements
 
@@ -26,4 +26,4 @@ OMNIPOINT_AI_API_KEY=your-api-key
 
 ## License
 
-GPL-2.0-or-later — see [LICENSE](https://spdx.org/licenses/GPL-2.0-or-later.html).
+[GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html)
