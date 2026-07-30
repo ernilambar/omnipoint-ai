@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-07-30T00:43:51+00:00\n"
+"PO-Revision-Date: 2026-07-30T04:17:38+00:00\n"
 "Language: ne_NP\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: omnipoint-ai\n"
@@ -41,6 +41,10 @@ msgstr "https://nilambar.net"
 #: src/Bootstrap.php:55
 msgid "Settings"
 msgstr "सेटिङहरू"
+
+#: src/Bootstrap.php:61
+msgid "Connectors"
+msgstr "कनेक्टरहरू"
 
 #: src/Provider/OmnipointAiProvider.php:98
 msgid "Text generation with any OpenAI-compatible API endpoint."
