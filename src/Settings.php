@@ -105,6 +105,14 @@ class Settings {
 			'omnipoint-ai',
 			'omnipoint_ai_general'
 		);
+
+		add_settings_field(
+			'available_models',
+			__( 'Available Models', 'omnipoint-ai' ),
+			[ $this, 'render_available_models_field' ],
+			'omnipoint-ai',
+			'omnipoint_ai_general'
+		);
 	}
 
 	/**
@@ -137,9 +145,16 @@ class Settings {
 			return;
 		}
 
+		wp_enqueue_style(
+			'omnipoint-ai-settings',
+			OMNIPOINT_AI_PLUGIN_URL . 'assets/js/settings.css',
+			[],
+			OMNIPOINT_AI_VERSION
+		);
+
 		wp_enqueue_script(
 			'omnipoint-ai-settings',
-			plugin_dir_url( OMNIPOINT_AI_BASE_FILEPATH ) . 'assets/js/settings.js',
+			OMNIPOINT_AI_PLUGIN_URL . 'assets/js/settings.js',
 			[],
 			OMNIPOINT_AI_VERSION,
 			true
@@ -154,6 +169,7 @@ class Settings {
 				'currentModel'    => get_option( self::MODEL_OPTION_NAME, '' ),
 				'noOverrideLabel' => __( '&mdash; Default &mdash;', 'omnipoint-ai' ),
 				'modelSelectId'   => self::MODEL_OPTION_NAME,
+				'modelsTableId'   => 'omnipoint-ai-models-table',
 				'errorLabel'      => __( 'Connection failed.', 'omnipoint-ai' ),
 			]
 		);
@@ -248,12 +264,19 @@ class Settings {
 		>
 			<option value=""><?php esc_html_e( 'Loading…', 'omnipoint-ai' ); ?></option>
 		</select>
+		<?php
+	}
+
+	/**
+	 * Renders the Available Models field.
+	 *
+	 * @since 1.0.0
+	 */
+	public function render_available_models_field(): void {
+		?>
 		<p id="omnipoint-ai-status" class="description"></p>
-		<div id="omnipoint-ai-model-list-wrap" style="display: none; margin-top: 10px;">
-			<p><strong><?php esc_html_e( 'Models:', 'omnipoint-ai' ); ?></strong></p>
-			<ul id="omnipoint-ai-model-list"></ul>
-			<button type="button" id="omnipoint-ai-show-all" class="button-link" style="display: none;"><?php esc_html_e( 'Show All', 'omnipoint-ai' ); ?></button>
-		</div>
+		<div id="omnipoint-ai-models-table"></div>
+		<button type="button" id="omnipoint-ai-show-all" class="button-link" style="display: none;"><?php esc_html_e( 'Show All', 'omnipoint-ai' ); ?></button>
 		<?php
 	}
 

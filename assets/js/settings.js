@@ -3,8 +3,7 @@
 
 	const select = document.getElementById( data.modelSelectId );
 	const status = document.getElementById( 'omnipoint-ai-status' );
-	const listWrap = document.getElementById( 'omnipoint-ai-model-list-wrap' );
-	const list = document.getElementById( 'omnipoint-ai-model-list' );
+	const modelsTable = document.getElementById( data.modelsTableId );
 	const showAll = document.getElementById( 'omnipoint-ai-show-all' );
 
 	if ( ! select ) {
@@ -13,13 +12,51 @@
 
 	const maxVisible = 10;
 
-	if ( showAll && list ) {
+	if ( showAll && modelsTable ) {
 		showAll.addEventListener( 'click', function () {
-			Array.prototype.forEach.call( list.children, function ( item ) {
+			Array.prototype.forEach.call( modelsTable.querySelectorAll( 'li' ), function ( item ) {
 				item.style.display = '';
 			} );
 			showAll.style.display = 'none';
 		} );
+	}
+
+	function esc( str ) {
+		return String( str )
+			.replace( /&/g, '&amp;' )
+			.replace( /</g, '&lt;' )
+			.replace( />/g, '&gt;' )
+			.replace( /"/g, '&quot;' );
+	}
+
+	function renderModelsTable( ids ) {
+		if ( ! modelsTable ) {
+			return;
+		}
+
+		if ( ! ids.length ) {
+			modelsTable.innerHTML = '';
+
+			if ( showAll ) {
+				showAll.style.display = 'none';
+			}
+
+			return;
+		}
+
+		let html = '<ul>';
+
+		ids.forEach( function ( modelId, index ) {
+			html += '<li' + ( index >= maxVisible ? ' style="display: none;"' : '' ) + '><code>' + esc( modelId ) + '</code></li>';
+		} );
+
+		html += '</ul>';
+
+		modelsTable.innerHTML = html;
+
+		if ( showAll ) {
+			showAll.style.display = ids.length > maxVisible ? '' : 'none';
+		}
 	}
 
 	function populate( ids, currentValue ) {
@@ -30,11 +67,7 @@
 		emptyOption.textContent = data.noOverrideLabel;
 		select.appendChild( emptyOption );
 
-		if ( list ) {
-			list.innerHTML = '';
-		}
-
-		ids.forEach( function ( modelId, index ) {
+		ids.forEach( function ( modelId ) {
 			const option = document.createElement( 'option' );
 			option.value = modelId;
 			option.textContent = modelId;
@@ -42,34 +75,25 @@
 				option.selected = true;
 			}
 			select.appendChild( option );
-
-			if ( list ) {
-				const item = document.createElement( 'li' );
-				item.textContent = modelId;
-				if ( index >= maxVisible ) {
-					item.style.display = 'none';
-				}
-				list.appendChild( item );
-			}
 		} );
-
-		if ( listWrap ) {
-			listWrap.style.display = ids.length ? 'block' : 'none';
-		}
-
-		if ( showAll ) {
-			showAll.style.display = ids.length > maxVisible ? '' : 'none';
-		}
 
 		select.disabled = false;
 	}
 
+	function setStatus( message, isError ) {
+		if ( ! status ) {
+			return;
+		}
+
+		status.textContent = message;
+		status.classList.toggle( 'omnipoint-ai-status-error', isError );
+		status.classList.toggle( 'omnipoint-ai-status-success', ! isError );
+	}
+
 	function showError() {
 		populate( [], data.currentModel );
-
-		if ( status ) {
-			status.textContent = data.errorLabel;
-		}
+		renderModelsTable( [] );
+		setStatus( data.errorLabel, true );
 	}
 
 	fetch( data.ajaxUrl, {
@@ -92,10 +116,8 @@
 			const modelIds = Array.isArray( json.data.models ) ? json.data.models : [];
 
 			populate( modelIds, data.currentModel );
-
-			if ( status ) {
-				status.textContent = json.data.message || '';
-			}
+			renderModelsTable( modelIds );
+			setStatus( json.data.message || '', ! modelIds.length );
 		} )
 		.catch( showError );
 } )();
