@@ -29,6 +29,7 @@ define( 'OMNIPOINT_AI_BASE_NAME', basename( __DIR__ ) );
 define( 'OMNIPOINT_AI_BASE_FILEPATH', __FILE__ );
 define( 'OMNIPOINT_AI_BASE_FILENAME', plugin_basename( __FILE__ ) );
 define( 'OMNIPOINT_AI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'OMNIPOINT_AI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 add_action(
 	'plugins_loaded',
