@@ -1,7 +1,16 @@
+#omnipoint-ai-status.omnipoint-ai-status-error,
+#omnipoint-ai-status.omnipoint-ai-status-success {
+	display: inline-block;
+	padding: 2px 8px;
+	font-weight: 500;
+}
+
 #omnipoint-ai-status.omnipoint-ai-status-error {
-	color: #d63638;
+	background: #fbeaea;
+	color: #7a1a1a;
 }
 
 #omnipoint-ai-status.omnipoint-ai-status-success {
-	color: #00a32a;
+	background: #eaf7ea;
+	color: #0a5c1e;
 }
