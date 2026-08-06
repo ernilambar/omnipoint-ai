@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Omnipoint AI 1.0.1\n"
+"Project-Id-Version: Omnipoint AI 1.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/omnipoint-ai\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgstr ""
 msgid "https://nilambar.net"
 msgstr ""
 
-#: src/Bootstrap.php:55
+#: src/Bootstrap.php:65
 msgid "Settings"
 msgstr ""
 
-#: src/Bootstrap.php:61
+#: src/Bootstrap.php:71
 msgid "Connectors"
 msgstr ""
 

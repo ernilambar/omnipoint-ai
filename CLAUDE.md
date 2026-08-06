@@ -55,7 +55,3 @@ Every task must end with:
 ### Settings (`src/Settings.php`)
 
 Admin page under **Settings → Omnipoint AI**: API Endpoint URL and an optional Default Text Model override, populated via AJAX (`assets/js/settings.js`). API key entry is out of scope — configured via WordPress core's AI credentials UI.
-
-### Key design constraints
-
-- All generation goes through `AbstractOpenAiCompatibleTextGenerationModel`; endpoint is `chat/completions`

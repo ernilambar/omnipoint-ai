@@ -6,13 +6,13 @@ WordPress plugin that registers any OpenAI-compatible API endpoint as an AI prov
 
 - WordPress 7.0+
 - PHP 7.4+
-- An OpenAI-compatible API endpoint and API key
+- An OpenAI-compatible API endpoint (API key required unless the provider is local)
 
 ## Installation
 
 1. Install and activate the plugin.
 2. Go to **Settings → Omnipoint AI** and set the API Endpoint URL.
-3. Set the API key under **Settings → AI → Connectors**.
+3. Set the API key under **Settings → Connectors**.
 4. Configure the AI Client under **Settings → AI**.
 
 ## Configuration
@@ -23,6 +23,12 @@ By default the plugin connects to `https://api.openai.com/v1`. Override it via t
 OMNIPOINT_AI_BASE_URL=https://your-endpoint.example.com/v1
 OMNIPOINT_AI_API_KEY=your-api-key
 ```
+
+## Contributing
+
+1. Install dev dependencies: `composer install`
+2. Run linting before submitting a PR: `composer lint` (use `composer format` to auto-fix)
+3. Open a pull request with a clear description of the change.
 
 ## License
 
