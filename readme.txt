@@ -1,10 +1,10 @@
-=== Omnipoint AI===
+=== Omnipoint AI Provider for OpenAI Compatible ===
 
 Contributors: nilambar
 Tags: ai, openai, ai client, connector, api
 Requires at least: 7.0
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,29 +31,20 @@ Set an API endpoint URL and, then use it directly from the AI Client wherever su
 
 == Installation ==
 
-= Using The WordPress Dashboard =
-
-1. Navigate to Plugins → Add New Plugin
-1. Search for "Omnipoint AI Provider for OpenAI Compatible"
-1. Install and activate the plugin
-1. Go to Settings → Omnipoint AI and set the API Endpoint URL
-1. Set the API key under Settings → AI → Connectors
-1. Configure the AI Client under Settings → AI
-
 = Using FTP =
 
 1. Extract 'omnipoint-ai.zip' to your computer
 1. Upload the 'omnipoint-ai' directory to your '/wp-content/plugins/' directory
 1. Activate the plugin on the WordPress Plugins dashboard
 1. Go to Settings → Omnipoint AI and set the API Endpoint URL
-1. Set the API key under Settings → AI → Connectors
-1. Configure the AI Client under Settings → AI
+1. Set the API key under Settings → Connectors
+1. Configure the AI Client under Settings → Omnipoint AI
 
 == Frequently Asked Questions ==
 
 = Do I need an API key? =
 
-Yes, unless the endpoint you configure does not require one. Set it under Settings → AI → Connectors.
+Yes, unless the endpoint you configure does not require one. Set it under Settings → Connectors.
 
 = What is the default endpoint? =
 
@@ -61,7 +52,10 @@ Yes, unless the endpoint you configure does not require one. Set it under Settin
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.1 - 2026-08-06 =
+* Added: updater implementation from GitHub
+
+= 1.0.0 - 2026-07-30 =
 * Initial release
 
 == Upgrade Notice ==

@@ -6,6 +6,7 @@
 		"vendor/**/*",
 		"omnipoint-ai.php",
 		"composer.json",
-		"readme.txt"
+		"readme.txt",
+		"!**/*.bak"
 	]
 }

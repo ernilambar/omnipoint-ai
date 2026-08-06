@@ -27,6 +27,10 @@
     "deny": [
       "Bash(chmod *)",
       "Bash(git checkout -- *)",
+      "Bash(git commit)",
+      "Bash(git commit *)",
+      "Bash(git commit:*)",
+      "Bash(git -C * commit *)",
       "Bash(git push *)",
       "Bash(git reset *)",
       "Bash(git stash drop *)",
