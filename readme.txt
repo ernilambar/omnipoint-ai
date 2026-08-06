@@ -4,7 +4,7 @@ Contributors: nilambar
 Tags: ai, openai, ai client, connector, api
 Requires at least: 7.0
 Tested up to: 7.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,9 @@ Yes, unless the endpoint you configure does not require one. Set it under Settin
 `https://api.openai.com/v1` — override it with any OpenAI-compatible endpoint under Settings → Omnipoint AI.
 
 == Changelog ==
+
+= 1.0.2 - 2026-08-06 =
+* Added: cleanup options in uninstall
 
 = 1.0.1 - 2026-08-06 =
 * Added: updater implementation from GitHub

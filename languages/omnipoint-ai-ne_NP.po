@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-08-06T15:48:37+00:00\n"
+"PO-Revision-Date: 2026-08-06T16:09:44+00:00\n"
 "Language: ne_NP\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: omnipoint-ai\n"
@@ -38,11 +38,11 @@ msgstr "निलाम्वर शर्मा"
 msgid "https://nilambar.net"
 msgstr "https://nilambar.net"
 
-#: src/Bootstrap.php:55
+#: src/Bootstrap.php:65
 msgid "Settings"
 msgstr "सेटिङहरू"
 
-#: src/Bootstrap.php:61
+#: src/Bootstrap.php:71
 msgid "Connectors"
 msgstr "कनेक्टरहरू"
 
