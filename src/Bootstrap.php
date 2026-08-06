@@ -30,6 +30,7 @@ class Bootstrap {
 	 * @since 1.0.0
 	 */
 	public function init(): void {
+		add_action( 'init', [ $this, 'load_textdomain' ] );
 		add_action( 'init', [ $this, 'register_provider' ], 5 );
 		add_action( 'init', [ $this, 'register_fallback_auth' ], 15 );
 		add_filter( 'plugin_action_links_' . OMNIPOINT_AI_BASE_FILENAME, [ $this, 'plugin_action_links' ] );
@@ -38,6 +39,15 @@ class Bootstrap {
 		add_filter( 'http_request_args', [ $this, 'extend_timeout' ], 10, 2 );
 
 		( new Settings() )->init();
+	}
+
+	/**
+	 * Loads the plugin's translated strings.
+	 *
+	 * @since 1.0.0
+	 */
+	public function load_textdomain(): void {
+		load_plugin_textdomain( 'omnipoint-ai', false, dirname( OMNIPOINT_AI_BASE_FILENAME ) . '/languages' );
 	}
 
 	/**
