@@ -1,6 +1,6 @@
 {
 	"name": "omnipoint-ai",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "AI provider for OpenAI-compatible endpoints.",
 	"keywords": [
 		"wordpress",

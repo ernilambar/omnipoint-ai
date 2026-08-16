@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-08-06T16:09:44+00:00\n"
+"PO-Revision-Date: 2026-08-16T07:09:59+00:00\n"
 "Language: ne_NP\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: omnipoint-ai\n"
@@ -84,7 +84,7 @@ msgstr "जडान असफल भयो।"
 #: src/Settings.php:206
 #, php-format
 msgid "Overridden by the %s environment variable."
-msgstr "%s वातावरण भ्यारिएबलद्वारा ओभरराइड गरिएको।"
+msgstr "%s वातावरण भेरिएबलद्वारा ओभरराइड गरिएको।"
 
 #: src/Settings.php:265
 msgid "Loading…"

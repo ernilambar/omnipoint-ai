@@ -90,7 +90,7 @@ class OmnipointAiProvider extends AbstractApiProvider {
 	 */
 	protected static function createProviderMetadata(): ProviderMetadata {
 		return new ProviderMetadata(
-			'omnipoint_ai',
+			'omnipoint',
 			'Omnipoint AI',
 			ProviderTypeEnum::cloud(),
 			'',

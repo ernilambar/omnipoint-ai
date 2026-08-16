@@ -5,7 +5,7 @@
  * Description: AI provider for OpenAI-compatible endpoints.
  * Requires at least: 7.0
  * Requires PHP: 7.4
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Nilambar Sharma
  * Author URI: https://nilambar.net
  * License: GPL-2.0-or-later
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'OMNIPOINT_AI_VERSION', '1.0.2' );
+define( 'OMNIPOINT_AI_VERSION', '1.0.3' );
 define( 'OMNIPOINT_AI_BASE_NAME', basename( __DIR__ ) );
 define( 'OMNIPOINT_AI_BASE_FILEPATH', __FILE__ );
 define( 'OMNIPOINT_AI_BASE_FILENAME', plugin_basename( __FILE__ ) );
