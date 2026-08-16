@@ -107,11 +107,11 @@ class Bootstrap {
 
 		$registry = AiClient::defaultRegistry();
 
-		if ( ! $registry->hasProvider( 'omnipoint_ai' ) ) {
+		if ( ! $registry->hasProvider( 'omnipoint' ) ) {
 			return;
 		}
 
-		$auth = $registry->getProviderRequestAuthentication( 'omnipoint_ai' );
+		$auth = $registry->getProviderRequestAuthentication( 'omnipoint' );
 		if ( null !== $auth ) {
 			return;
 		}
@@ -119,7 +119,7 @@ class Bootstrap {
 		$api_key = getenv( 'OMNIPOINT_AI_API_KEY' );
 
 		$registry->setProviderRequestAuthentication(
-			'omnipoint_ai',
+			'omnipoint',
 			new ApiKeyRequestAuthentication( false !== $api_key ? $api_key : '' )
 		);
 	}
