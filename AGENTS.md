@@ -20,6 +20,7 @@ pnpm install
 composer lint        # Run PHP lint + PHPCS
 composer format      # Auto-fix with PHPCBF
 composer pot         # Generate POT file
+pnpm run format      # Format JS/CSS/JSON with Prettier
 pnpm run ready       # Install optimized vendor for deploy
 ```
 
@@ -34,6 +35,11 @@ pnpm run ready       # Install optimized vendor for deploy
 - Import classes via `use` statements; avoid fully-qualified names.
 - PHPCS config: `.phpcs.xml.dist`.
 
+**JavaScript / CSS / JSON:**
+
+- Format with Prettier using `@wordpress/prettier-config`, wired up via the
+  `prettier` key in `package.json` (no local `.prettierrc` file).
+
 ## Quality Gate
 
-Run `composer lint` before submitting changes. Fix all PHPCS warnings.
+Run `composer lint` before submitting changes. Fix all PHPCS warnings. Run `pnpm run format` to format files using Prettier.
