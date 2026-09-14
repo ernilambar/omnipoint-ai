@@ -14,9 +14,12 @@
 
 	if ( showAll && modelsTable ) {
 		showAll.addEventListener( 'click', function () {
-			Array.prototype.forEach.call( modelsTable.querySelectorAll( 'li' ), function ( item ) {
-				item.style.display = '';
-			} );
+			Array.prototype.forEach.call(
+				modelsTable.querySelectorAll( 'li' ),
+				function ( item ) {
+					item.style.display = '';
+				}
+			);
 			showAll.style.display = 'none';
 		} );
 	}
@@ -47,7 +50,12 @@
 		let html = '<ul>';
 
 		ids.forEach( function ( modelId, index ) {
-			html += '<li' + ( index >= maxVisible ? ' style="display: none;"' : '' ) + '><code>' + esc( modelId ) + '</code></li>';
+			html +=
+				'<li' +
+				( index >= maxVisible ? ' style="display: none;"' : '' ) +
+				'><code>' +
+				esc( modelId ) +
+				'</code></li>';
 		} );
 
 		html += '</ul>';
@@ -113,7 +121,9 @@
 				return;
 			}
 
-			const modelIds = Array.isArray( json.data.models ) ? json.data.models : [];
+			const modelIds = Array.isArray( json.data.models )
+				? json.data.models
+				: [];
 
 			populate( modelIds, data.currentModel );
 			renderModelsTable( modelIds );
