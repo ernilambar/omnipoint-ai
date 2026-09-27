@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Nilambar\OmnipointAi\Provider\OmnipointAiProvider;
+use Nilambar\OmnipointAi\Settings;
 use WordPress\AiClient\Messages\Enums\ModalityEnum;
 use WordPress\AiClient\Providers\Http\DTO\Request;
 use WordPress\AiClient\Providers\Http\DTO\Response;
@@ -39,6 +40,34 @@ use WordPress\AiClient\Providers\OpenAiCompatibleImplementation\AbstractOpenAiCo
 class OmnipointAiModelMetadataDirectory extends AbstractOpenAiCompatibleModelMetadataDirectory {
 
 	/**
+	 * Model ID substrings of models that do not support chat completions.
+	 *
+	 * Covers embedding, image, audio, speech, moderation, rerank, realtime
+	 * and legacy completions-only models.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var array<string>
+	 */
+	const EXCLUDED_MODEL_PATTERNS = [
+		'embed',
+		'dall-e',
+		'image',
+		'whisper',
+		'tts',
+		'transcribe',
+		'audio',
+		'speech',
+		'moderation',
+		'rerank',
+		'realtime',
+		'babbage',
+		'davinci',
+		'instruct',
+		'sora',
+	];
+
+	/**
 	 * {@inheritDoc}
 	 *
 	 * @since 1.0.0
@@ -56,6 +85,17 @@ class OmnipointAiModelMetadataDirectory extends AbstractOpenAiCompatibleModelMet
 			$headers,
 			$data
 		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * Includes the endpoint URL so changing it never serves another endpoint's models.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function getBaseCacheKey(): string {
+		return parent::getBaseCacheKey() . '_' . md5( OmnipointAiProvider::url() );
 	}
 
 	/**
@@ -109,6 +149,15 @@ class OmnipointAiModelMetadataDirectory extends AbstractOpenAiCompatibleModelMet
 			),
 		];
 
+		/**
+		 * Filters the model ID substrings that mark models without chat completions support.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array<string> $excluded_patterns Case-insensitive model ID substrings.
+		 */
+		$excluded_patterns = (array) apply_filters( 'omnipoint_ai_excluded_model_patterns', self::EXCLUDED_MODEL_PATTERNS );
+
 		$models = [];
 
 		foreach ( $raw_models as $model_entry ) {
@@ -118,8 +167,7 @@ class OmnipointAiModelMetadataDirectory extends AbstractOpenAiCompatibleModelMet
 
 			$model_id = $model_entry['id'];
 
-			// Skip embedding-only models, which cannot be used for text generation.
-			if ( false !== stripos( $model_id, 'embed' ) ) {
+			if ( $this->is_excluded_model( $model_id, $excluded_patterns ) ) {
 				continue;
 			}
 
@@ -136,6 +184,31 @@ class OmnipointAiModelMetadataDirectory extends AbstractOpenAiCompatibleModelMet
 
 		ksort( $models );
 
+		// List the default model first so automatic model selection picks it.
+		$default_model = get_option( Settings::MODEL_OPTION_NAME, '' );
+		if ( '' !== $default_model && isset( $models[ $default_model ] ) ) {
+			$models = [ $default_model => $models[ $default_model ] ] + $models;
+		}
+
 		return array_values( $models );
+	}
+
+	/**
+	 * Checks whether a model ID matches any excluded pattern.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string        $model_id          Model ID.
+	 * @param array<string> $excluded_patterns Case-insensitive model ID substrings.
+	 * @return bool Whether the model is excluded.
+	 */
+	private function is_excluded_model( string $model_id, array $excluded_patterns ): bool {
+		foreach ( $excluded_patterns as $pattern ) {
+			if ( '' !== $pattern && false !== stripos( $model_id, (string) $pattern ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

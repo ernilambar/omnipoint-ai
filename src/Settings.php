@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use Exception;
 use Nilambar\OmnipointAi\Provider\OmnipointAiProvider;
+use Throwable;
 use WordPress\AiClient\AiClient;
 
 /**
@@ -40,6 +40,8 @@ class Settings {
 		add_action( 'admin_init', [ $this, 'register_settings' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'wp_ajax_' . self::AJAX_ACTION, [ $this, 'ajax_get_models' ] );
+		add_action( 'add_option_' . self::MODEL_OPTION_NAME, [ $this, 'invalidate_models_cache' ] );
+		add_action( 'update_option_' . self::MODEL_OPTION_NAME, [ $this, 'invalidate_models_cache' ] );
 	}
 
 	/**
@@ -118,6 +120,9 @@ class Settings {
 	/**
 	 * Sanitizes the endpoint URL.
 	 *
+	 * An empty value resets to the default. An invalid value keeps the previous
+	 * URL and reports an error.
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $value Raw value.
@@ -126,11 +131,21 @@ class Settings {
 	public function sanitize_endpoint_url( $value ): string {
 		$url = trim( (string) $value );
 
-		if ( '' === $url || ! preg_match( '#^https?://#i', $url ) ) {
+		if ( '' === $url ) {
 			return self::DEFAULT_ENDPOINT_URL;
 		}
 
-		return rtrim( $url, '/' );
+		if ( ! preg_match( '#^https?://#i', $url ) || false === filter_var( $url, FILTER_VALIDATE_URL ) ) {
+			add_settings_error(
+				self::ENDPOINT_OPTION_NAME,
+				'invalid_endpoint_url',
+				__( 'Invalid endpoint URL. Previous value kept.', 'omnipoint-ai' )
+			);
+
+			return self::get_endpoint_url();
+		}
+
+		return rtrim( esc_url_raw( $url, [ 'http', 'https' ] ), '/' );
 	}
 
 	/**
@@ -256,13 +271,16 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	public function render_default_model_field(): void {
+		$current_model = (string) get_option( self::MODEL_OPTION_NAME, '' );
 		?>
 		<select
 			name="<?php echo esc_attr( self::MODEL_OPTION_NAME ); ?>"
 			id="<?php echo esc_attr( self::MODEL_OPTION_NAME ); ?>"
-			disabled
 		>
-			<option value=""><?php esc_html_e( 'Loading…', 'omnipoint-ai' ); ?></option>
+			<option value=""><?php esc_html_e( '&mdash; Default &mdash;', 'omnipoint-ai' ); ?></option>
+			<?php if ( '' !== $current_model ) : ?>
+				<option value="<?php echo esc_attr( $current_model ); ?>" selected><?php echo esc_html( $current_model ); ?></option>
+			<?php endif; ?>
 		</select>
 		<?php
 	}
@@ -274,7 +292,7 @@ class Settings {
 	 */
 	public function render_available_models_field(): void {
 		?>
-		<p id="omnipoint-ai-status" class="description"></p>
+		<p id="omnipoint-ai-status" class="description"><?php esc_html_e( 'Loading…', 'omnipoint-ai' ); ?></p>
 		<div id="omnipoint-ai-models-table"></div>
 		<button type="button" id="omnipoint-ai-show-all" class="button-link" style="display: none;"><?php esc_html_e( 'Show All', 'omnipoint-ai' ); ?></button>
 		<?php
@@ -315,6 +333,19 @@ class Settings {
 	}
 
 	/**
+	 * Clears the cached model list so the default model order is rebuilt.
+	 *
+	 * @since 1.0.0
+	 */
+	public function invalidate_models_cache(): void {
+		if ( ! class_exists( AiClient::class ) ) {
+			return;
+		}
+
+		OmnipointAiProvider::modelMetadataDirectory()->invalidateCaches();
+	}
+
+	/**
 	 * AJAX handler: returns available models for the configured endpoint.
 	 *
 	 * @since 1.0.0
@@ -346,6 +377,8 @@ class Settings {
 				$models_metadata
 			);
 
+			sort( $model_ids );
+
 			$count = count( $model_ids );
 
 			wp_send_json_success(
@@ -358,8 +391,13 @@ class Settings {
 					),
 				]
 			);
-		} catch ( Exception $e ) {
-			wp_send_json_error( [ 'code' => 'api_error' ] );
+		} catch ( Throwable $e ) {
+			wp_send_json_error(
+				[
+					'code'    => 'api_error',
+					'message' => $e->getMessage(),
+				]
+			);
 		}
 	}
 }
