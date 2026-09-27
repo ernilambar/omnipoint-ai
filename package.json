@@ -1,6 +1,6 @@
 {
 	"name": "omnipoint-ai",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "AI provider for OpenAI-compatible endpoints.",
 	"keywords": [
 		"wordpress",
@@ -28,7 +28,7 @@
 	"browserslist": "> 1%, last 2 versions, not dead",
 	"prettier": "@wordpress/prettier-config",
 	"devDependencies": {
-		"@wordpress/prettier-config": "^4.55.0",
+		"@wordpress/prettier-config": "^4.56.0",
 		"easy-replace-in-files": "^2.0.0",
 		"packtor": "^2.0.0",
 		"prettier": "npm:wp-prettier@3.9.6",
