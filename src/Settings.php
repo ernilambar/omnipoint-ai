@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use Exception;
 use Nilambar\OmnipointAi\Provider\OmnipointAiProvider;
+use Throwable;
 use WordPress\AiClient\AiClient;
 
 /**
@@ -120,6 +120,9 @@ class Settings {
 	/**
 	 * Sanitizes the endpoint URL.
 	 *
+	 * An empty value resets to the default. An invalid value keeps the previous
+	 * URL and reports an error.
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $value Raw value.
@@ -128,11 +131,21 @@ class Settings {
 	public function sanitize_endpoint_url( $value ): string {
 		$url = trim( (string) $value );
 
-		if ( '' === $url || ! preg_match( '#^https?://#i', $url ) ) {
+		if ( '' === $url ) {
 			return self::DEFAULT_ENDPOINT_URL;
 		}
 
-		return rtrim( $url, '/' );
+		if ( ! preg_match( '#^https?://#i', $url ) || false === filter_var( $url, FILTER_VALIDATE_URL ) ) {
+			add_settings_error(
+				self::ENDPOINT_OPTION_NAME,
+				'invalid_endpoint_url',
+				__( 'Invalid endpoint URL. Previous value kept.', 'omnipoint-ai' )
+			);
+
+			return self::get_endpoint_url();
+		}
+
+		return rtrim( esc_url_raw( $url, [ 'http', 'https' ] ), '/' );
 	}
 
 	/**
@@ -378,8 +391,13 @@ class Settings {
 					),
 				]
 			);
-		} catch ( Exception $e ) {
-			wp_send_json_error( [ 'code' => 'api_error' ] );
+		} catch ( Throwable $e ) {
+			wp_send_json_error(
+				[
+					'code'    => 'api_error',
+					'message' => $e->getMessage(),
+				]
+			);
 		}
 	}
 }

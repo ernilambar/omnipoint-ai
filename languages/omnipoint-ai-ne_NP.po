@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-09-27T11:30:51+00:00\n"
+"PO-Revision-Date: 2026-09-27T11:39:49+00:00\n"
 "Language: ne_NP\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: omnipoint-ai\n"
@@ -72,39 +72,43 @@ msgstr "पूर्वनिर्धारित पाठ मोडेल"
 msgid "Available Models"
 msgstr "उपलब्ध मोडेलहरू"
 
-#: src/Settings.php:172
-#: src/Settings.php:267
+#: src/Settings.php:142
+msgid "Invalid endpoint URL. Previous value kept."
+msgstr "अमान्य इन्डपोइन्ट युआरएल। अघिल्लो मान राखियो।"
+
+#: src/Settings.php:185
+#: src/Settings.php:280
 msgid "&mdash; Default &mdash;"
 msgstr "&mdash; पूर्वनिर्धारित &mdash;"
 
-#: src/Settings.php:175
+#: src/Settings.php:188
 msgid "Connection failed."
 msgstr "जडान असफल भयो।"
 
 #. translators: %s: environment variable name.
-#: src/Settings.php:208
+#: src/Settings.php:221
 #, php-format
 msgid "Overridden by the %s environment variable."
 msgstr "%s वातावरण भेरिएबलद्वारा ओभरराइड गरिएको।"
 
-#: src/Settings.php:282
+#: src/Settings.php:295
 msgid "Loading…"
 msgstr "लोड हुँदै..."
 
-#: src/Settings.php:284
+#: src/Settings.php:297
 msgid "Show All"
 msgstr "सबै देखाउनुहोस्"
 
-#: src/Settings.php:344
+#: src/Settings.php:357
 msgid "Insufficient permissions."
 msgstr "पर्याप्त अनुमति छैन।"
 
-#: src/Settings.php:348
+#: src/Settings.php:361
 msgid "AI Client is not available."
 msgstr "एआई क्लाइन्ट उपलब्ध छैन।"
 
 #. translators: %d: number of models.
-#: src/Settings.php:376
+#: src/Settings.php:389
 #, php-format
 msgid "%d model loaded."
 msgid_plural "%d models loaded."

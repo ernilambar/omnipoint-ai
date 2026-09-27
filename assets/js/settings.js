@@ -105,10 +105,10 @@
 		status.classList.toggle( 'omnipoint-ai-status-success', ! isError );
 	}
 
-	function showError() {
+	function showError( message ) {
 		populate( [], data.currentModel, false );
 		renderModelsTable( [] );
-		setStatus( data.errorLabel, true );
+		setStatus( message || data.errorLabel, true );
 	}
 
 	fetch( data.ajaxUrl, {
@@ -124,7 +124,7 @@
 		} )
 		.then( function ( json ) {
 			if ( ! json.success || ! json.data ) {
-				showError();
+				showError( json.data && json.data.message );
 				return;
 			}
 
@@ -136,5 +136,7 @@
 			renderModelsTable( modelIds );
 			setStatus( json.data.message || '', ! modelIds.length );
 		} )
-		.catch( showError );
+		.catch( function () {
+			showError();
+		} );
 } )();
