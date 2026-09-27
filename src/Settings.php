@@ -162,7 +162,7 @@ class Settings {
 
 		wp_enqueue_style(
 			'omnipoint-ai-settings',
-			OMNIPOINT_AI_PLUGIN_URL . 'assets/js/settings.css',
+			OMNIPOINT_AI_PLUGIN_URL . 'assets/css/settings.css',
 			[],
 			OMNIPOINT_AI_VERSION
 		);
