@@ -35,7 +35,7 @@ class Bootstrap {
 		add_action( 'init', [ $this, 'register_fallback_auth' ], 15 );
 		add_filter( 'plugin_action_links_' . OMNIPOINT_AI_BASE_FILENAME, [ $this, 'plugin_action_links' ] );
 		add_filter( 'http_request_host_is_external', [ $this, 'allow_external_requests' ], 10, 3 );
-		add_filter( 'http_allowed_safe_ports', [ $this, 'allow_ports' ] );
+		add_filter( 'http_allowed_safe_ports', [ $this, 'allow_ports' ], 10, 3 );
 		add_filter( 'http_request_args', [ $this, 'extend_timeout' ], 10, 2 );
 
 		( new Settings() )->init();
@@ -135,7 +135,7 @@ class Bootstrap {
 	 * @return bool Whether the request is allowed.
 	 */
 	public function allow_external_requests( $external, $host, $url ): bool {
-		if ( strpos( $url, OmnipointAiProvider::url() ) !== false ) {
+		if ( $this->is_endpoint_url( $url ) ) {
 			return true;
 		}
 
@@ -143,17 +143,23 @@ class Bootstrap {
 	}
 
 	/**
-	 * Allows the configured endpoint's port.
+	 * Allows the configured endpoint's port for requests to the endpoint.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array<int> $ports The ports.
+	 * @param string     $host  The host of the request.
+	 * @param string     $url   The URL of the request.
 	 * @return array<int> The allowed ports.
 	 */
-	public function allow_ports( $ports ): array {
+	public function allow_ports( $ports, $host, $url ): array {
+		if ( ! $this->is_endpoint_url( $url ) ) {
+			return $ports;
+		}
+
 		$port = wp_parse_url( OmnipointAiProvider::url(), PHP_URL_PORT );
 
-		if ( ! $port ) {
+		if ( ! $port || in_array( $port, $ports, true ) ) {
 			return $ports;
 		}
 
@@ -170,7 +176,7 @@ class Bootstrap {
 	 * @return array<string, mixed> Filtered HTTP request args.
 	 */
 	public function extend_timeout( array $args, string $url ): array {
-		if ( strpos( $url, OmnipointAiProvider::url() ) === false ) {
+		if ( ! $this->is_endpoint_url( $url ) ) {
 			return $args;
 		}
 
@@ -183,5 +189,44 @@ class Bootstrap {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Checks whether a URL targets the configured endpoint's host and port.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url The URL to check.
+	 * @return bool Whether the URL targets the configured endpoint.
+	 */
+	private function is_endpoint_url( string $url ): bool {
+		$endpoint = wp_parse_url( OmnipointAiProvider::url() );
+		$target   = wp_parse_url( $url );
+
+		if ( ! isset( $endpoint['host'], $target['host'] ) ) {
+			return false;
+		}
+
+		if ( 0 !== strcasecmp( $endpoint['host'], $target['host'] ) ) {
+			return false;
+		}
+
+		return $this->get_port( $endpoint ) === $this->get_port( $target );
+	}
+
+	/**
+	 * Returns the explicit or scheme-default port of a parsed URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array<string, int|string> $parts Parsed URL parts.
+	 * @return int The port.
+	 */
+	private function get_port( array $parts ): int {
+		if ( isset( $parts['port'] ) ) {
+			return (int) $parts['port'];
+		}
+
+		return ( isset( $parts['scheme'] ) && 'http' === strtolower( (string) $parts['scheme'] ) ) ? 80 : 443;
 	}
 }

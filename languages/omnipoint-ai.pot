@@ -51,60 +51,61 @@ msgstr ""
 msgid "Text generation with any OpenAI-compatible API endpoint."
 msgstr ""
 
-#: src/Settings.php:52
+#: src/Settings.php:54
 msgctxt "page title"
 msgid "Omnipoint AI Settings"
 msgstr ""
 
-#: src/Settings.php:53
+#: src/Settings.php:55
 msgctxt "menu title"
 msgid "Omnipoint AI"
 msgstr ""
 
-#: src/Settings.php:95
+#: src/Settings.php:97
 msgid "API Endpoint URL"
 msgstr ""
 
-#: src/Settings.php:103
+#: src/Settings.php:105
 msgid "Default Text Model"
 msgstr ""
 
-#: src/Settings.php:111
+#: src/Settings.php:113
 msgid "Available Models"
 msgstr ""
 
-#: src/Settings.php:170
+#: src/Settings.php:172
+#: src/Settings.php:267
 msgid "&mdash; Default &mdash;"
 msgstr ""
 
-#: src/Settings.php:173
+#: src/Settings.php:175
 msgid "Connection failed."
 msgstr ""
 
 #. translators: %s: environment variable name.
-#: src/Settings.php:206
+#: src/Settings.php:208
 #, php-format
 msgid "Overridden by the %s environment variable."
 msgstr ""
 
-#: src/Settings.php:265
+#: src/Settings.php:282
 msgid "Loading…"
 msgstr ""
 
-#: src/Settings.php:279
+#: src/Settings.php:284
 msgid "Show All"
 msgstr ""
 
-#: src/Settings.php:326
+#: src/Settings.php:344
 msgid "Insufficient permissions."
 msgstr ""
 
-#: src/Settings.php:330
+#: src/Settings.php:348
 msgid "AI Client is not available."
 msgstr ""
 
 #. translators: %d: number of models.
-#: src/Settings.php:356
+#: src/Settings.php:376
 #, php-format
 msgid "%d model loaded."
 msgid_plural "%d models loaded."

@@ -67,7 +67,7 @@
 		}
 	}
 
-	function populate( ids, currentValue ) {
+	function populate( ids, currentValue, isLoaded ) {
 		select.innerHTML = '';
 
 		const emptyOption = document.createElement( 'option' );
@@ -85,7 +85,14 @@
 			select.appendChild( option );
 		} );
 
-		select.disabled = false;
+		// Keep the saved model when the list failed to load, so saving does not clear it.
+		if ( ! isLoaded && currentValue ) {
+			const option = document.createElement( 'option' );
+			option.value = currentValue;
+			option.textContent = currentValue;
+			option.selected = true;
+			select.appendChild( option );
+		}
 	}
 
 	function setStatus( message, isError ) {
@@ -99,7 +106,7 @@
 	}
 
 	function showError() {
-		populate( [], data.currentModel );
+		populate( [], data.currentModel, false );
 		renderModelsTable( [] );
 		setStatus( data.errorLabel, true );
 	}
@@ -125,7 +132,7 @@
 				? json.data.models
 				: [];
 
-			populate( modelIds, data.currentModel );
+			populate( modelIds, data.currentModel, true );
 			renderModelsTable( modelIds );
 			setStatus( json.data.message || '', ! modelIds.length );
 		} )
